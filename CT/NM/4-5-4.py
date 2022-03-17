@@ -36,9 +36,12 @@ max_x = -sys.maxsize
 min_y = sys.maxsize
 max_y = -sys.maxsize
 
+is_it_zero = True
+
 for i in range(2000):
     for j in range(2000):
         if arr[i][j]==1:
+            is_it_zero=False
             if min_x>i:
                 min_x = i
             elif max_x<i:
@@ -50,5 +53,12 @@ for i in range(2000):
                 max_y = j
 
 result = ((max_x+1) - min_x) * ((max_y+1) - min_y)
-print(result)
+
+#처음에는 넓이가 0이 될 것을 고려하지 못했음. 
+#for 문 내의 if 문 max_x = max(max_x,i) 로 했으면 더 깔끔했을듯.
+
+if is_it_zero:
+    print(0)
+else:
+    print(result)
 
