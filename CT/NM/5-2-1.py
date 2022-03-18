@@ -1,7 +1,7 @@
 import sys
 
 n,m = map(int,input().split())
-arr1 = [] #arr를 시간으로 ..?  위치로..? 시간으로 합시다!
+arr1 = [] #arr를 시간으로 ..?  위치로..? 시간!
 arr2 = []
 
 #시작하는 위치, 방향, 시간
@@ -49,14 +49,10 @@ for i in range(m):
     t = int(t)
     now = move2(now,d,t)
 
-answer = sys.maxsize
+answer = -1
+for i in range(1,len(arr1)):
+    if arr1[i]==arr2[i]:
+        answer = i
+        break
 
-for i in range(2,len(arr1)):
-    for j in range(2,len(arr2)):
-        if i==j and arr1[i]==arr2[j]:
-            answer = min(answer,i)
-
-if answer==sys.maxsize:
-    print(-1)
-else:
-    print(answer)
+print(answer)
