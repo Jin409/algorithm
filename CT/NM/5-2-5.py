@@ -28,7 +28,6 @@ for i in range(len(time_arr)):
             
 
 #전염된 사람끼리 만나도 전염된 것으로 간주한다. 
-#최종적으로 누가 전염되었는지 출력 (0111)
 
 for i in range(len(arr)):
     if arr[i]!=0:
