@@ -12,7 +12,7 @@ def move(start_idx):
     distance = 0
     for i in range(len(room_ppl)):
         if start_idx > i:
-            distance += (n-1)*room_ppl[i]
+            distance += (n-abs(start_idx-i))*room_ppl[i]
         elif start_idx == i:
             continue
         else:
