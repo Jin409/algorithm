@@ -13,3 +13,20 @@ for i in range(n-m+1):
 
 print(cnt)
 
+n,k = map(int,input().split())
+arr = [0]*101
+
+#사탕의 개수와 바구니의 좌표
+for i in range(n):
+    loca,candy = map(int,input().split())
+    arr[loca] = candy
+
+#중심점 찾기
+max_candy = 0
+for i in range(k,101-k):
+    result = 0
+    for j in range(i-k,i+k+1):
+        result += arr[j]
+    max_candy = max(result,max_candy)
+
+print(max_candy)
