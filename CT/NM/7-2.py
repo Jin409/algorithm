@@ -11,6 +11,7 @@ for i in range(d):
     cheeze_tuple = tuple(map(int,input().split()))
     cheeze.append(cheeze_tuple)
 
+
 #특정한 사람이 먹은 치즈
 def find(person,time):
     ate_cheeze = []
@@ -59,16 +60,23 @@ for i in range(1,s):
 
 #아픈 사람이 먹은 치즈를 먹은 사람 전부 카운트하기 
 max_cnt = 0 # 우선 확실히 아픈 사람을 더한다.
-
 # 원인이 되는 치즈를 먹은 사람을 모두 더하기
 for i in range(len(find_common_cheeze)):
     cnt=s
+    cnt_people = [
+        sick_people[j]
+        for j in range(len(sick_people))
+    ]
     rot_cheeze = find_common_cheeze[i]
     for j in range(len(cheeze)):
         p,ch,t = cheeze[j] 
         #아프지 않은 사람
-        if p not in sick_people and ch==rot_cheeze:
+        if p not in cnt_people and ch==rot_cheeze:
             cnt+=1
+            cnt_people.append(p)
     max_cnt = max(max_cnt,cnt)
             
 print(max_cnt)
+
+    
+# 같은 치즈를 또 먹는 경우를 고려하지 않았음 => cnt_people 생성해서 이미 센 사람을 제외시키도록 함. 
