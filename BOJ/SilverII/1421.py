@@ -2,9 +2,6 @@
 # 단 한번의 판매 기회 
 # 나무를 한번 자를 때 c원이 들고, k(개의 나무)*w(단위당가격)*l(길이)
 
-from xxlimited import new
-
-
 n,c,w = map(int,input().split()) #n개의 나무 c 자를 때 드는 가격 w 단위당 가격
 
 trees = [
