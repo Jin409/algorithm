@@ -5,27 +5,23 @@ coin_arr = [
     for _ in range(n)
 ]
 
-
 """
 k보다 크면 넘어가고, k보다 작으면
 계속 단위별로 뺀다. 
 -> 시간초과 났다
--> 
+-> while 문을 절대 안쓰려고 해야 할듯.. 
 """
+
+cnt=0
 
 coin_arr.sort(reverse=True)
 
-cnt=0
-idx=0
-
-while k>0:
-    if coin_arr[idx] > k:
-        idx+=1
+for coin in coin_arr:
+    if k<=0:
+        break
+    elif coin > k:
         continue
-    elif k < coin_arr[idx]:
-        idx+=1
-    else:
-        k -= coin_arr[idx]
-        cnt+=1
-
+    cnt+=k//coin
+    k %=coin
+    
 print(cnt)
