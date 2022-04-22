@@ -1,30 +1,21 @@
 """
-n명 (번호가 있다)
-i번 인사하면 L[i]만큼 체력을 잃고
-J[i] 만큼 기쁨을 얻음. 
-체력은 100 그 안에서 해야 함.
-최대 기쁨을 출력.
+DP 를 안쓰고 풀었더니 오류 남. => Joy 가 더해지는 것을 고려 x 
+냅색 알고리즘 
 """
-
 n = int(input())
-L = list(map(int,input().split())) #체력을 잃음
-J = list(map(int,input().split())) #기쁨을 얻음
-health = 100
-joy = 0
-idx = 0
-new_arr = []
+L = list(map(int,input().split()))
+J = list(map(int,input().split()))
+L,J = [0]+L,[0]+J
+dp = [[0 for _ in range(101)]for _ in range(n+1)]
 
-for i in range(n):
-    new_arr.append((i,J[i]-L[i])) #인덱스와 차를 저장
+#이전 사람과 악수해서 기쁨을 얻은 경우와 이전까지의 최댓값 중 더 큰 것을 넣는다. 
+#dp[i][j] => i번째사람까지 악수하고 100-j만큼 체력이 있을 때의 기쁨의 최댓값
+for i in range(1,n+1):
+    for j in range(1,101):
+        if L[i]<=j:
+            dp[i][j] = max(dp[i-1][j],dp[i-1][j-L[i]]+J[i])
+        else:
+            dp[i][j] = dp[i-1][j]
 
-new_arr.sort(key=lambda x:x[1], reverse=True) #오름차순 정렬 
-
-while True:
-    p_idx,lj_diff = new_arr[idx]
-    health-=L[p_idx]
-    if health<=0 or idx>=len(new_arr):
-        break
-    joy += J[p_idx]
-    idx+=1
-
-print(joy)
+#n번째 사람까지 악수하고, 체력이 1 남았을 때의 경우를 출력. 
+print(dp[n][99])
