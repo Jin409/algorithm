@@ -1,6 +1,6 @@
 """
 DP 를 안쓰고 풀었더니 오류 남. => Joy 가 더해지는 것을 고려 x 
-냅색 알고리즘 
+
 """
 n = int(input())
 L = list(map(int,input().split()))
