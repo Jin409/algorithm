@@ -5,29 +5,55 @@
 삭제되면 횟수 0으로 바뀜
 최종 후보가 누구인지 결정
 """
+import sys
 
 n = int(input()) #사진틀의 개수
 k = int(input()) #총 추천 횟수
 recommends = list(map(int,input().split()))
-# student_num = [0]*101 #학생번호
+student_num = [sys.maxsize]*101 #학생번호
+cnt=0
 
-photos = []
-
-for reco in recommends:
-    if n==len(photos):
-        min_reco = photos.index(min(photos, key=lambda x: x[1]))
-        del photos[min_reco]
+for i in range(k): #추천을 돌면서
+    idx = recommends[i]
+    if student_num[idx]==sys.maxsize:
+        if cnt==n:
+            min_value = min(student_num)
+            min_index = [i for i in range(101) if min_value==student_num[i]]
+            for j in range(i):
+                if recommends[j] in min_index:
+                    remove_idx = recommends[j]
+                    student_num[remove_idx] = sys.maxsize
+                    recommends[j] = 0
+                    cnt-=1
+                    break
+        student_num[idx]=1
+        cnt+=1
     else:
-        if not reco in photos:
-            print(reco,photos)
-            photos.append((reco,1))
-        else:
-            find_reco = photos.find(reco)
-            reco,cnt = photos[find_reco]
-            cnt+=1
-            photos.append(reco,cnt)
+        student_num[idx]+=1
 
-photos.sort()
 
-for i in range(n):
-    print(photos[i][0],end=' ')
+
+for i in range(101):
+    if student_num[i]!=sys.maxsize:
+        print(i,end=' ')
+
+# photos = []
+
+# for reco in recommends:
+#     if n==len(photos):
+#         min_reco = photos.index(min(photos, key=lambda x: x[1]))
+#         del photos[min_reco]
+#     else:
+#         if not reco in photos:
+#             print(reco,photos)
+#             photos.append((reco,1))
+#         else:
+#             find_reco = photos.find(reco)
+#             reco,cnt = photos[find_reco]
+#             cnt+=1
+#             photos.append(reco,cnt)
+
+# photos.sort()
+
+# for i in range(n):
+#     print(photos[i][0],end=' ')
