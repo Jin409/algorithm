@@ -9,6 +9,25 @@
 n = int(input()) #사진틀의 개수
 k = int(input()) #총 추천 횟수
 recommends = list(map(int,input().split()))
+# student_num = [0]*101 #학생번호
+
+photos = []
 
 for reco in recommends:
-    if 
+    if n==len(photos):
+        min_reco = photos.index(min(photos, key=lambda x: x[1]))
+        del photos[min_reco]
+    else:
+        if not reco in photos:
+            print(reco,photos)
+            photos.append((reco,1))
+        else:
+            find_reco = photos.find(reco)
+            reco,cnt = photos[find_reco]
+            cnt+=1
+            photos.append(reco,cnt)
+
+photos.sort()
+
+for i in range(n):
+    print(photos[i][0],end=' ')
