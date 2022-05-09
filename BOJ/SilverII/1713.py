@@ -21,10 +21,12 @@ for i in range(k):
             for u in range(i): #지금 확인하고 있는 추천 이전까지
                 if recommends[u] in min_arr:
                     del_student = recommends[u]
-                    recommends[u] = 0
                     student_num[del_student] = sys.maxsize
                     cnt-=1 #사진틀 공간 하나 생겼으니까
                     break #삭제하고 바로 브레이크
+            for u in range(i):
+                if recommends[u]==del_student:
+                    recommends[u]=0
         student_num[student]=1
         cnt+=1
     else:
@@ -33,24 +35,3 @@ for i in range(k):
 for i in range(101):
     if student_num[i]!=sys.maxsize:
         print(i,end=' ')
-
-# photos = []
-
-# for reco in recommends:
-#     if n==len(photos):
-#         min_reco = photos.index(min(photos, key=lambda x: x[1]))
-#         del photos[min_reco]
-#     else:
-#         if not reco in photos:
-#             print(reco,photos)
-#             photos.append((reco,1))
-#         else:
-#             find_reco = photos.find(reco)
-#             reco,cnt = photos[find_reco]
-#             cnt+=1
-#             photos.append(reco,cnt)
-
-# photos.sort()
-
-# for i in range(n):
-#     print(photos[i][0],end=' ')
